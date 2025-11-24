@@ -57,6 +57,16 @@ const StarSVG = ({ size = 50, color = "gold" }: StarSVGProps) => {
     );
 };
 
+// Sanitize to make sure value is a number for value
+// Helper used for both controlled + uncontrolled
+export const sanitize = (v: any, count: number) => {
+    const num = Number(v);
+    if (isNaN(num)) return 0;
+    if (num < 0) return 0;
+    if (num > count) return count;
+    return num;
+};
+
 export function Rating({
     value,
     defaultValue = 3.5,
@@ -70,8 +80,13 @@ export function Rating({
     onChange,
 }: RatingProps) {
     const isControlled = value !== undefined;
-    const [internalValue, setInternalValue] = useState(defaultValue);
-    const rating = isControlled ? value! : internalValue;
+    // const [internalValue, setInternalValue] = useState(defaultValue);
+    const [internalValue, setInternalValue] = useState(() =>
+        sanitize(defaultValue, count)
+    );
+    const rating = isControlled ? sanitize(value, count) : internalValue;
+    // const rawRating = isControlled ? value! : internalValue;
+    // const rating = Math.max(0, Math.min(count, rawRating));
 
     // Calculating Margin only once and key too - the props for all icons
     const stars = useMemo(
@@ -122,26 +137,49 @@ export function Rating({
     }, [size, emptyColor, RatingIcon]);
 
     // Active icon with color if given else uses provided color
-    const ActiveIconMemo = useMemo(() => {
-        const useUserColor = color == null;
+    // const ActiveIconMemo = useMemo(() => {
+    //     const useUserColor = color == null;
 
+    //     return React.cloneElement(RatingIcon, {
+    //         ...baseProps,
+    //         size,
+    //         width: size,
+    //         height: size,
+
+    //         ...(useUserColor
+    //             ? {
+    //                   color: baseProps.color,
+    //                   fill: baseProps.fill,
+    //                   stroke: baseProps.stroke,
+    //               }
+    //             : {
+    //                   color,
+    //                   fill: color,
+    //                   stroke: color,
+    //               }),
+    //     });
+    // }, [size, color, RatingIcon]);
+    const ActiveIconMemo = useMemo(() => {
+        // If Rating.color is given, override icon color
+        if (color != null) {
+            return React.cloneElement(RatingIcon, {
+                ...baseProps,
+                size,
+                width: size,
+                height: size,
+
+                color,
+                fill: color,
+                stroke: color,
+            });
+        }
+
+        // ELSE: use icon exactly as user defined it
         return React.cloneElement(RatingIcon, {
             ...baseProps,
             size,
             width: size,
             height: size,
-
-            ...(useUserColor
-                ? {
-                      color: baseProps.color,
-                      fill: baseProps.fill,
-                      stroke: baseProps.stroke,
-                  }
-                : {
-                      color,
-                      fill: color,
-                      stroke: color,
-                  }),
         });
     }, [size, color, RatingIcon]);
 

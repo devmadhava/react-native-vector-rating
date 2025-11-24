@@ -110,19 +110,20 @@ function Rating({
     }));
   }, [size, emptyColor, RatingIcon]);
   const ActiveIconMemo = useMemo(() => {
-    const useUserColor = color == null;
-    return React.cloneElement(RatingIcon, __spreadValues(__spreadProps(__spreadValues({}, baseProps), {
+    if (color != null) {
+      return React.cloneElement(RatingIcon, __spreadProps(__spreadValues({}, baseProps), {
+        size,
+        width: size,
+        height: size,
+        color,
+        fill: color,
+        stroke: color
+      }));
+    }
+    return React.cloneElement(RatingIcon, __spreadProps(__spreadValues({}, baseProps), {
       size,
       width: size,
       height: size
-    }), useUserColor ? {
-      color: baseProps.color,
-      fill: baseProps.fill,
-      stroke: baseProps.stroke
-    } : {
-      color,
-      fill: color,
-      stroke: color
     }));
   }, [size, color, RatingIcon]);
   return (

@@ -143,19 +143,20 @@ function Rating({
     }));
   }, [size, emptyColor, RatingIcon]);
   const ActiveIconMemo = (0, import_react.useMemo)(() => {
-    const useUserColor = color == null;
-    return import_react.default.cloneElement(RatingIcon, __spreadValues(__spreadProps(__spreadValues({}, baseProps), {
+    if (color != null) {
+      return import_react.default.cloneElement(RatingIcon, __spreadProps(__spreadValues({}, baseProps), {
+        size,
+        width: size,
+        height: size,
+        color,
+        fill: color,
+        stroke: color
+      }));
+    }
+    return import_react.default.cloneElement(RatingIcon, __spreadProps(__spreadValues({}, baseProps), {
       size,
       width: size,
       height: size
-    }), useUserColor ? {
-      color: baseProps.color,
-      fill: baseProps.fill,
-      stroke: baseProps.stroke
-    } : {
-      color,
-      fill: color,
-      stroke: color
     }));
   }, [size, color, RatingIcon]);
   return (
