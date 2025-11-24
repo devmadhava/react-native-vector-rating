@@ -61,10 +61,7 @@ const StarSVG = ({ size = 50, color = "gold" }: StarSVGProps) => {
 // Helper used for both controlled + uncontrolled
 export const sanitize = (v: any, count: number) => {
     const num = Number(v);
-    if (isNaN(num)) return 0;
-    if (num < 0) return 0;
-    if (num > count) return count;
-    return num;
+    return Math.min(count, Math.max(0, isNaN(num) ? 0 : num));
 };
 
 export function Rating({
@@ -225,6 +222,7 @@ export function Rating({
             >
                 {stars.map(({ marginRight }, i) => (
                     <Pressable
+                        disabled={disabled}
                         key={i}
                         onPress={() => handlePress(i)}
                         style={{ width: size, height: size, marginRight }}
