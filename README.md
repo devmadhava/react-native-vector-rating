@@ -33,6 +33,9 @@ No extra peer dependencies. No linking needed.
 
 ## 🚀 Usage
 
+## Preview
+![Screenshot](https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png)
+
 ### Basic Example
 
 ```tsx
