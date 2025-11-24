@@ -6,35 +6,38 @@ Zero dependencies. No MaskedView. No SVG requirement. Just clean, fast rendering
 
 ---
 
-## ✨ Features
+## Features
 
-* ⭐ **Use ANY icon** (`<Icon />` JSX element)
-* 🎨 **Custom colors** (`color`, `emptyColor`)
-* 🎛️ **Controlled + Uncontrolled** modes
-* 🎚️ **Partial ratings supported** (e.g., 3.4 → partially filled)
-* 🧩 **Gap/spacing** between icons
-* 🔢 **Custom count** (e.g., 4‑star or 10‑star systems)
-* 📦 **Minimal bundle size**
-* 📱 Works with **React Native 0.77+** and Expo
+* **Use Expo and Lucide icon** (`<Icon />` JSX element)
+* **Custom colors** (`color`, `emptyColor`)
+* **Controlled + Uncontrolled** modes
+* **Partial ratings supported** (e.g., 3.4 → partially filled)
+* **Gap/spacing** between icons
+* **Custom count** (e.g., 4‑star or 10‑star systems)
+* **Minimal bundle size**
+* Works with **React Native 0.77+** and Expo
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install react-native-vector-rating
-# or
-yarn add react-native-vector-rating
 ```
 
 No extra peer dependencies. No linking needed.
 
 ---
 
-## 🚀 Usage
+## Usage
 
-## Preview
-![Screenshot](https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png)
+### Full Example Preview
+
+Full example available at: [`example.tsx`](https://github.com/devmadhava/react-native-vector-rating/blob/main/example/example.tsx)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png" width="320" />
+</p>
 
 ### Basic Example
 
@@ -55,7 +58,7 @@ export default function MyComponent() {
 
 ---
 
-## 🎛️ Props
+## Props
 
 | Prop           | Type                   | Default       | Description                  |
 | -------------- | ---------------------- | ------------- | ---------------------------- |
@@ -72,7 +75,7 @@ export default function MyComponent() {
 
 ---
 
-## 🔄 Controlled Example
+## Controlled Example
 
 ```tsx
 const [rating, setRating] = useState(2);
@@ -87,7 +90,7 @@ const [rating, setRating] = useState(2);
 
 ---
 
-## 🎨 Uncontrolled Example
+## Uncontrolled Example
 
 ```tsx
 <Rating
@@ -100,7 +103,7 @@ const [rating, setRating] = useState(2);
 
 ---
 
-## ⭐ Examples with Popular Icon Libraries
+## Examples with Popular Icon Libraries
 
 ### Expo Vector Icons
 
@@ -140,7 +143,7 @@ import { Award } from "lucide-react-native";
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 This component renders:
 
@@ -154,7 +157,7 @@ Fast, stable, cross‑platform.
 
 ---
 
-## 🛡️ Input Sanitization
+## Input Sanitization
 
 Ratings are sanitized to:
 
@@ -166,7 +169,7 @@ This ensures bulletproof stability.
 
 ---
 
-## 🪄 Advanced Example Showcase
+## Advanced Example Showcase
 
 ```tsx
 <Rating size={25} icon={<AntDesign name="star" />} />
@@ -180,6 +183,6 @@ This ensures bulletproof stability.
 
 ---
 
-## 📄 License
+## License
 
 MIT © devMadhava
