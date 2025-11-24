@@ -1,18 +1,11 @@
-import {
-    AntDesign,
-    FontAwesome,
-    Ionicons,
-    MaterialCommunityIcons,
-} from "@expo/vector-icons";
-
+import { AntDesign, FontAwesome, Foundation, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Award, MoonStar, SquareStar, Star } from "lucide-react-native";
-
 import { useState } from "react";
 import { View } from "react-native";
 import { Rating } from "react-native-vector-rating";
 
 export default function Index() {
-    const [controlledValue, setControlledValue] = useState(2);
+    const [controlledRating, setControlledRating] = useState(1.5);
 
     return (
         <View
@@ -22,73 +15,77 @@ export default function Index() {
                 alignItems: "center",
             }}
         >
-            <View style={{ gap: 25, alignItems: "center" }}>
-                {/* 1. Fallback Rating (built-in star view) */}
+            <View style={{gap: 25, alignItems: 'center'}}>
+
+                {/* Fall Back Rating (Made Using View) */}
                 <Rating />
 
-                {/* 2. Expo Icon (simple use) */}
+                {/* Expo Icon - With Size */}
                 <Rating size={25} icon={<AntDesign name="star" />} />
 
-                {/* 3. Lucide Icon (color + size) */}
+                {/* Lucide Icon - With Size and Color */}
                 <Rating size={30} color="gold" icon={<Star />} />
 
-                {/* 4. Expo Icon (custom gap + color) */}
-                <Rating
-                    size={35}
-                    gap={2}
-                    color="skyblue"
-                    icon={<Ionicons name="happy" />}
-                />
+                {/* Expo Icon - With Size, Color and Gap*/}
+                <Rating size={35} color="skyblue" gap={2} icon={<Ionicons name="happy" />} />
 
-                {/* 5. Lucide Icon (4-count rating) */}
-                <Rating
-                    size={40}
-                    gap={2}
-                    color="blue"
-                    count={4}
-                    icon={<MoonStar />}
-                />
+                {/* Lucide Icon - With Size, Color, Gap and Count */}
+                <Rating size={40} color="blue" gap={2} count={4} icon={<MoonStar />} />
 
-                {/* 6. Expo Icon (custom empty color) */}
+                {/* Expo Icon - With Size, Color, Gap, Count and Empty Color */}
                 <Rating
                     size={45}
+                    color="red"
                     gap={2}
                     count={4}
-                    color="red"
                     emptyColor="black"
-                    icon={<MaterialCommunityIcons name="heart" />}
+                    icon={<MaterialCommunityIcons name="heart"/>}
                 />
 
-                {/* 7. Lucide Icon (custom styled icon = stroke + fill) */}
+                {/* Lucide Icon - With Size, Gap, Count, Empty Color and Icon Styling */}
                 <Rating
                     size={50}
                     gap={2}
                     count={6}
-                    icon={<Award color="black" fill="#ff4500" />}
+                    icon={<Award color={"black"} fill={"#ff4500"} />}
                 />
 
-                {/* 8. Expo Icon (uncontrolled onChange) */}
+                {/* Expo Icon - With Size, Gap, Count, Empty Color, Icon Styling, defaultValue and onChange */}
                 <Rating
                     size={55}
                     gap={2}
                     count={4}
                     emptyColor="black"
-                    icon={<FontAwesome name="thumbs-up" color="red" />}
-                    onChange={(v) => console.log("Uncontrolled:", v)}
+                    icon={<FontAwesome name="thumbs-up" color={"red"} />}
+                    defaultValue={2.7}
+                    onChange={(v) => {
+                        console.log("Logging New Ratings from Uncontrolled Component: ", v);
+                    }}
                 />
 
-                {/* 9. Fully Controlled Rating */}
+                {/* Lucide Icon - Controlled - With Size, Gap, Count, Empty Color, Icon Styling and onChange */}
                 <Rating
                     size={60}
                     gap={2}
                     count={3}
                     emptyColor="black"
-                    icon={<SquareStar stroke="gold" />}
-                    value={controlledValue}
+                    icon={<SquareStar stroke={"gold"} />}
+                    value={controlledRating}
                     onChange={(v) => {
-                        console.log("Controlled:", v);
-                        setControlledValue(v);
+                        console.log("Logging New Ratings from Controlled Component: ", v);
+                        setControlledRating(v);
                     }}
+                />
+
+                {/* Expo Icon - Disabled - With Size, Gap, Count, Empty Color and Icon Styling */}
+                <Rating
+                    size={65}
+                    gap={2}
+                    count={3}
+                    value={1.2}
+                    emptyColor="black"
+                    icon={<Foundation name="sheriff-badge" color={"red"} />}
+                    disabled={true}
                 />
             </View>
         </View>

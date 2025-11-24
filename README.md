@@ -1,58 +1,84 @@
 # react-native-vector-rating
 
-A lightweight, flexible, and high‑performance rating component for **React Native** that works with **any icon library** — Lucide, Expo Vector Icons, custom SVG icons, or your own JSX icons.
+A lightweight and rating component for **React Native** that works with **most widely used icon libraries** such as **Lucide Icons** and **Expo Vector Icons**. You can also use custom SVG icons.
 
-Zero dependencies. No MaskedView. No SVG requirement. Just clean, fast rendering using a View‑based clipping technique.
+Zero dependencies. Full example available at: [`example.tsx`](https://github.com/devmadhava/react-native-vector-rating/blob/main/example/example.tsx)
 
----
+<p>
+    <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png" width="320" />
+</p>
 
-## Features
+## Installation and Usage
 
-* **Use Expo and Lucide icon** (`<Icon />` JSX element)
-* **Custom colors** (`color`, `emptyColor`)
-* **Controlled + Uncontrolled** modes
-* **Partial ratings supported** (e.g., 3.4 → partially filled)
-* **Gap/spacing** between icons
-* **Custom count** (e.g., 4‑star or 10‑star systems)
-* **Minimal bundle size**
-* Works with **React Native 0.77+** and Expo
-
----
-
-## Installation
+Install the Component with simple `npm install` command. No extra peer dependencies just react and react-native.
 
 ```bash
 npm install react-native-vector-rating
 ```
 
-No extra peer dependencies. No linking needed.
+Then use the `Rating` component by importing it in your application.
 
----
+```tsx
+import { Rating } from "react-native-vector-rating";
+```
 
-## Usage
+### Basic Usage
 
-### Full Example Preview
-
-Full example available at: [`example.tsx`](https://github.com/devmadhava/react-native-vector-rating/blob/main/example/example.tsx)
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png" width="320" />
-</p>
-
-### Basic Example
+You can use **Lucide Icons** and **Expo Icons** with this component. Just pass the Icon you want to use as an instance in the icon `prop`.
 
 ```tsx
 import { Rating } from "react-native-vector-rating";
 import { Star } from "lucide-react-native";
 
 export default function MyComponent() {
+    return <Rating icon={<Star />} />;
+}
+```
+
+Or If you are using **Expo Icons**:
+
+```tsx
+import { Rating } from "react-native-vector-rating";
+import { AntDesign } from "@expo/vector-icons;
+
+export default function MyComponent() {
   return (
     <Rating
-      icon={<Star />}
-      defaultValue={3.5}
-      size={30}
+      icon={<AntDesign name="star" />}
     />
   );
+}
+```
+
+### Complete Component Use
+
+This Component works much like a regular input and allows both controlled and uncontrolled instances. You can set `defaultValue`, `value`and `onChange` much like regular Input Component.
+
+```tsx
+import { Rating } from "react-native-vector-rating";
+import { Star } from "lucide-react-native";
+
+export default function MyComponent() {
+    return (
+        <Rating
+            size={30}                   // Size of individual icon
+            gap={2}                     // Gap Between Two Icons
+            color={"blue"}              // Color of the Icon - filled / rated
+            emptyColor={"black"}        // Color of the Icon - unfilled / not rated
+            icon={<Star />}             // Icon Component
+            defaultValue={3.5}          // Starting Value this can be fractional too
+
+            // When User presses a rating then we get a new value
+            onChange={(value: number) => {
+                console.log("Rating Value: " + value)
+            }}
+
+            // In case Of Controlled Component - where you want to useState to manage value
+            value={3}                   // Whatever Value You want to use
+            // If You want to disable the rating or only use to display ratings then set disabled to true
+            disabled={false}            // No Need to use this unless you want to set it to true
+        />
+    );
 }
 ```
 
@@ -64,7 +90,7 @@ export default function MyComponent() {
 | -------------- | ---------------------- | ------------- | ---------------------------- |
 | `value`        | `number`               | —             | Controlled rating value      |
 | `defaultValue` | `number`               | `3.5`         | Initial value (uncontrolled) |
-| `icon`         | `JSX.Element`          | Fallback Star | Icon element to render       |
+| `icon`         | `Icon Element`         | Fallback Star | Icon element to render       |
 | `size`         | `number`               | `20`          | Icon size (width & height)   |
 | `gap`          | `number`               | `0`           | Space between icons          |
 | `count`        | `number`               | `5`           | Total number of icons        |
@@ -80,12 +106,7 @@ export default function MyComponent() {
 ```tsx
 const [rating, setRating] = useState(2);
 
-<Rating
-  value={rating}
-  onChange={setRating}
-  icon={<Star />}
-  size={40}
-/>;
+<Rating value={rating} onChange={setRating} icon={<Star />} size={40} />;
 ```
 
 ---
@@ -94,11 +115,11 @@ const [rating, setRating] = useState(2);
 
 ```tsx
 <Rating
-  defaultValue={4}
-  icon={<Star color="purple" />}
-  color="gold"
-  size={35}
-/>;
+    defaultValue={4}
+    icon={<Star color="purple" />}
+    color="gold"
+    size={35}
+/>
 ```
 
 ---
@@ -110,10 +131,7 @@ const [rating, setRating] = useState(2);
 ```tsx
 import { AntDesign } from "@expo/vector-icons";
 
-<Rating
-  icon={<AntDesign name="star" />}
-  size={30}
-/>;
+<Rating icon={<AntDesign name="star" />} size={30} />;
 ```
 
 ### Lucide Icons
@@ -121,12 +139,7 @@ import { AntDesign } from "@expo/vector-icons";
 ```tsx
 import { MoonStar } from "lucide-react-native";
 
-<Rating
-  icon={<MoonStar />}
-  size={35}
-  color="blue"
-  gap={2}
-/>;
+<Rating icon={<MoonStar />} size={35} color="blue" gap={2} />;
 ```
 
 ### Custom Styled Icons
@@ -134,52 +147,89 @@ import { MoonStar } from "lucide-react-native";
 ```tsx
 import { Award } from "lucide-react-native";
 
-<Rating
-  icon={<Award color="black" fill="#ff4500" />}
-  size={45}
-  count={6}
-/>;
+<Rating icon={<Award color="black" fill="#ff4500" />} size={45} count={6} />;
 ```
-
----
-
-## How It Works
-
-This component renders:
-
-* A row of **empty icons**
-* A row of **filled icons** positioned above it
-* A clipping container (`overflow: hidden`) that exposes only the portion matching the rating value
-
-This avoids MaskedView, clipPath, or platform‑specific APIs.
-
-Fast, stable, cross‑platform.
-
----
-
-## Input Sanitization
-
-Ratings are sanitized to:
-
-* Always be a number
-* Always be between `0` and `count`
-* Never be `NaN`, `null`, or invalid
-
-This ensures bulletproof stability.
 
 ---
 
 ## Advanced Example Showcase
 
 ```tsx
-<Rating size={25} icon={<AntDesign name="star" />} />
-<Rating size={30} color="gold" icon={<Star />} />
-<Rating size={35} color="skyblue" gap={2} icon={<Ionicons name="happy" />} />
-<Rating size={40} color="blue" gap={2} count={4} icon={<MoonStar />} />
-<Rating size={45} color="red" gap={2} count={4} emptyColor="black" icon={<MaterialCommunityIcons name="heart" />} />
-<Rating size={50} gap={2} count={6} icon={<Award color="black" fill="#ff4500" />} />
-<Rating size={55} gap={2} count={4} emptyColor="black" icon={<FontAwesome name="thumbs-up" color="red" />} onChange={(v) => console.log(v)} />
+    {/* Fall Back Rating (Made Using View) */}
+    <Rating />
+
+    {/* Expo Icon - With Size */}
+    <Rating size={25} icon={<AntDesign name="star" />} />
+
+    {/* Lucide Icon - With Size and Color */}
+    <Rating size={30} color="gold" icon={<Star />} />
+
+    {/* Expo Icon - With Size, Color and Gap*/}
+    <Rating size={35} color="skyblue" gap={2} icon={<Ionicons name="happy" />} />
+
+    {/* Lucide Icon - With Size, Color, Gap and Count */}
+    <Rating size={40} color="blue" gap={2} count={4} icon={<MoonStar />} />
+
+    {/* Expo Icon - With Size, Color, Gap, Count and Empty Color */}
+    <Rating
+        size={45}
+        color="red"
+        gap={2}
+        count={4}
+        emptyColor="black"
+        icon={<MaterialCommunityIcons name="heart"/>}
+    />
+
+    {/* Lucide Icon - With Size, Gap, Count, Empty Color and Icon Styling */}
+    <Rating
+        size={50}
+        gap={2}
+        count={6}
+        icon={<Award color={"black"} fill={"#ff4500"} />}
+    />
+
+    {/* Expo Icon - With Size, Gap, Count, Empty Color, Icon Styling, defaultValue and onChange */}
+    <Rating
+        size={55}
+        gap={2}
+        count={4}
+        emptyColor="black"
+        icon={<FontAwesome name="thumbs-up" color={"red"} />}
+        defaultValue={2.7}
+        onChange={(v) => {
+            console.log("Logging New Ratings from Uncontrolled Component: ", v);
+        }}
+    />
+
+    {/* Lucide Icon - Controlled - With Size, Gap, Count, Empty Color, Icon Styling and onChange */}
+    <Rating
+        size={60}
+        gap={2}
+        count={3}
+        emptyColor="black"
+        icon={<SquareStar stroke={"gold"} />}
+        value={controlledRating}
+        onChange={(v) => {
+            console.log("Logging New Ratings from Controlled Component: ", v);
+            setControlledRating(v);
+        }}
+    />
+
+    {/* Expo Icon - Disabled - With Size, Gap, Count, Empty Color and Icon Styling */}
+    <Rating
+        size={65}
+        gap={2}
+        count={3}
+        value={1.2}
+        emptyColor="black"
+        icon={<Foundation name="sheriff-badge" color={"red"} />}
+        disabled={true}
+    />
 ```
+The above code as shown before will render  these **Rating** components:
+<p>
+    <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png" width="320" />
+</p>
 
 ---
 
