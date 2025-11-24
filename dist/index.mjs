@@ -58,6 +58,10 @@ var StarSVG = ({ size = 50, color = "gold" }) => {
     ))
   );
 };
+var sanitize = (v, count) => {
+  const num = Number(v);
+  return Math.min(count, Math.max(0, isNaN(num) ? 0 : num));
+};
 function Rating({
   value,
   defaultValue = 3.5,
@@ -71,8 +75,10 @@ function Rating({
   onChange
 }) {
   const isControlled = value !== void 0;
-  const [internalValue, setInternalValue] = useState(defaultValue);
-  const rating = isControlled ? value : internalValue;
+  const [internalValue, setInternalValue] = useState(
+    () => sanitize(defaultValue, count)
+  );
+  const rating = isControlled ? sanitize(value, count) : internalValue;
   const stars = useMemo(
     () => [...Array(count)].map((_, i) => ({
       // i: i,
@@ -153,6 +159,7 @@ function Rating({
       stars.map(({ marginRight }, i) => /* @__PURE__ */ React.createElement(
         Pressable,
         {
+          disabled,
           key: i,
           onPress: () => handlePress(i),
           style: { width: size, height: size, marginRight }
