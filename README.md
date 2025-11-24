@@ -5,7 +5,7 @@ A lightweight and rating component for **React Native** that works with **most w
 Zero dependencies. Full example available at: [`example.tsx`](https://github.com/devmadhava/react-native-vector-rating/blob/main/example/example.tsx)
 
 <p>
-    <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png" width="320" />
+    <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/example.png" width="300" />
 </p>
 
 ## Installation and Usage
@@ -228,7 +228,7 @@ import { Award } from "lucide-react-native";
 ```
 The above code as shown before will render  these **Rating** components:
 <p>
-    <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/screenshot.png" width="320" />
+    <img src="https://raw.githubusercontent.com/devmadhava/react-native-vector-rating/refs/heads/main/example/example.png" width="300" />
 </p>
 
 ---
