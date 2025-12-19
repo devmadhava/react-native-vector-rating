@@ -35,5 +35,23 @@
             "require": "./dist/index.js",
             "import": "./dist/index.mjs"
         }
-    }
+    },
+    "keywords": [
+        "react-native",
+        "reactjs",
+        "reactnative",
+        "ios",
+        "android",
+        "ratings",
+        "ui-components",
+        "rating",
+        "stars",
+        "vector",
+        "rating-component",
+        "react-native-component",
+        "react-native-ui",
+        "react-native-ui-library",
+        "react-native-stars",
+        "react-native-vector-rating"
+    ]
 }
